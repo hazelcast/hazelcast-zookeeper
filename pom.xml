@@ -10,7 +10,7 @@
 
     <properties>
         <curator.version>2.9.0</curator.version>
-        <hazelcast.version>3.6-RC2-SNAPSHOT</hazelcast.version>
+        <hazelcast.version>3.6-EA2</hazelcast.version>
 
         <junit.version>4.12</junit.version>
         <mockito.version>2.0.31-beta</mockito.version>
