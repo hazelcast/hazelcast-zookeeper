@@ -31,13 +31,15 @@ public class HazelcastIT {
 
     @Test
     public void testIntegration() {
+        String zookeeperURL = zkTestServer.getConnectString();
+
         Config config = new Config();
-        config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED, "true");
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+        config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED, "true");
+
         DiscoveryStrategyConfig dicoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
-        dicoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zkTestServer.getConnectString());
-        DiscoveryConfig discoveryConfig = config.getNetworkConfig().getJoin().getDiscoveryConfig();
-        discoveryConfig.addDiscoveryProviderConfig(dicoveryStrategyConfig);
+        dicoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);
+        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryProviderConfig(dicoveryStrategyConfig);
 
         HazelcastInstance instance1 = Hazelcast.newHazelcastInstance(config);
         HazelcastInstance instance2 = Hazelcast.newHazelcastInstance(config);
@@ -46,6 +48,5 @@ public class HazelcastIT {
         assertEquals(2, instance1Size);
         int instance2Size = instance2.getCluster().getMembers().size();
         assertEquals(2, instance2Size);
-
     }
 }
