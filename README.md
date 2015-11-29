@@ -6,7 +6,6 @@ It allows to use Apache Zookeeper for Hazelcast cluster discovery.
 ```java
 @Test
 public void testIntegration() {
-  //my Zookeeper URL
   String zookeeperURL = "localhost:2181";
 
   Config config = new Config();
