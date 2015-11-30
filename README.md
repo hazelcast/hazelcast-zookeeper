@@ -1,8 +1,4 @@
-# HzKeeper
-Hazelcast cluster discovery strategy based on Apache Zookeeper
-
-It allows to use Apache Zookeeper for Hazelcast cluster discovery.
-
+# Hazelcast Discovery Plugin for Apache ZooKeeper
 ```java
 @Test
 public void testIntegration() {
@@ -25,3 +21,6 @@ public void testIntegration() {
   assertEquals(2, instance2Size);
 }
 ```
+[![Build Status](https://travis-ci.org/jerrinot/hzkeeper.svg?branch=master)](https://travis-ci.org/jerrinot/hzkeeper)
+
+This is a community project. It is not affiliated with supported or endorsed by Hazelcast
