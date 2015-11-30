@@ -30,8 +30,6 @@ public class ZookeeperDiscovery extends AbstractDiscoveryStrategy {
     private ServiceDiscovery<Void> serviceDiscovery;
     private ServiceInstance<Void> serviceInstance;
 
-
-
     public ZookeeperDiscovery(DiscoveryNode discoveryNode, ILogger logger, Map<String, Comparable> properties) {
         super(logger, properties);
         this.thisNode = discoveryNode;
