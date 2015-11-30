@@ -1,4 +1,4 @@
-package info.jerrinot.hzdiscovery.curator;
+package info.jerrinot.hzdiscovery.zookeeper;
 
 import com.hazelcast.config.properties.PropertyDefinition;
 import com.hazelcast.config.properties.PropertyTypeConverter;

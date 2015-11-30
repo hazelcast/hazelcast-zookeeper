@@ -1,7 +1,6 @@
-package info.jerrinot.hzdiscovery.curator;
+package info.jerrinot.hzdiscovery.zookeeper;
 
 import com.hazelcast.config.Config;
-import com.hazelcast.config.DiscoveryConfig;
 import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
