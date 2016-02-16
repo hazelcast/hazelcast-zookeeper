@@ -1,4 +1,4 @@
-package info.jerrinot.hzdiscovery.zookeeper;
+package com.hazelcast.zookeeper;
 
 import com.hazelcast.config.properties.PropertyDefinition;
 import com.hazelcast.logging.ILogger;
@@ -25,11 +25,11 @@ public class ZookeeperDiscoveryStrategyFactory implements DiscoveryStrategyFacto
     }
 
     public Class<? extends DiscoveryStrategy> getDiscoveryStrategyType() {
-        return ZookeeperDiscovery.class;
+        return ZookeeperDiscoveryStrategy.class;
     }
 
     public DiscoveryStrategy newDiscoveryStrategy(DiscoveryNode discoveryNode, ILogger logger, Map<String, Comparable> properties) {
-        return new ZookeeperDiscovery(discoveryNode, logger, properties);
+        return new ZookeeperDiscoveryStrategy(discoveryNode, logger, properties);
     }
 
     public Collection<PropertyDefinition> getConfigurationProperties() {

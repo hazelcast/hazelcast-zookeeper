@@ -1,4 +1,4 @@
-package info.jerrinot.hzdiscovery.zookeeper;
+package com.hazelcast.zookeeper;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.DiscoveryStrategyConfig;
@@ -38,7 +38,7 @@ public class HazelcastIT {
 
         DiscoveryStrategyConfig dicoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
         dicoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);
-        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryProviderConfig(dicoveryStrategyConfig);
+        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(dicoveryStrategyConfig);
 
         HazelcastInstance instance1 = Hazelcast.newHazelcastInstance(config);
         HazelcastInstance instance2 = Hazelcast.newHazelcastInstance(config);
