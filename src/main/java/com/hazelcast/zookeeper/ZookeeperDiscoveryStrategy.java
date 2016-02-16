@@ -1,4 +1,4 @@
-package info.jerrinot.hzdiscovery.zookeeper;
+package com.hazelcast.zookeeper;
 
 import com.hazelcast.logging.ILogger;
 import com.hazelcast.nio.Address;
@@ -13,12 +13,14 @@ import org.apache.curator.x.discovery.ServiceDiscoveryBuilder;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.UriSpec;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class ZookeeperDiscovery extends AbstractDiscoveryStrategy {
+public class ZookeeperDiscoveryStrategy
+        extends AbstractDiscoveryStrategy {
     private static final String DEFAULT_PATH = "/discovery/hazelcast";
     private static final String DEFAULT_GROUP = "hazelcast";
 
@@ -30,7 +32,7 @@ public class ZookeeperDiscovery extends AbstractDiscoveryStrategy {
     private ServiceDiscovery<Void> serviceDiscovery;
     private ServiceInstance<Void> serviceInstance;
 
-    public ZookeeperDiscovery(DiscoveryNode discoveryNode, ILogger logger, Map<String, Comparable> properties) {
+    public ZookeeperDiscoveryStrategy(DiscoveryNode discoveryNode, ILogger logger, Map<String, Comparable> properties) {
         super(logger, properties);
         this.thisNode = discoveryNode;
         this.logger = logger;
@@ -39,8 +41,19 @@ public class ZookeeperDiscovery extends AbstractDiscoveryStrategy {
     @Override
     public void start() {
         startCuratorClient();
+        /* Added this for clients, because Discovery SPI does not set
+        discoveryNode for clients */
+        Address privateAddress = null;
+        try {
+            privateAddress = new Address("127.0.0.1", 5701);
+        } catch (UnknownHostException e) {
+            logger.warning("Cannot bind local host");
+        }
 
-        Address privateAddress = thisNode.getPrivateAddress();
+        if (thisNode != null) {
+            privateAddress = thisNode.getPrivateAddress();
+        }
+
         group = getOrDefault(ZookeeperDiscoveryProperties.GROUP, DEFAULT_GROUP);
         try {
             serviceInstance = ServiceInstance.<Void>builder()

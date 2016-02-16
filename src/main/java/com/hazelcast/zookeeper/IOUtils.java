@@ -1,4 +1,4 @@
-package info.jerrinot.hzdiscovery.zookeeper;
+package com.hazelcast.zookeeper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
