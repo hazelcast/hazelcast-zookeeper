@@ -165,7 +165,7 @@ public static void main(String[] args) {
 ```
 
 ##Important Notice
-In order to work hazelcast-zookeeper plugin for client you should have hazelcast client version greater than 3.6.
+In order for the hazelcast-zookeeper plugin to work for the Hazelcast Java client, you need to use Hazelcast Client 3.6.1 or higher.
 
 
 
