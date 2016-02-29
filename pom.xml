@@ -12,7 +12,7 @@
         <maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
         <jdk.version>1.6</jdk.version>
         <curator.version>2.9.0</curator.version>
-        <hazelcast.version>3.7-SNAPSHOT</hazelcast.version>
+        <hazelcast.version>3.6.1</hazelcast.version>
         <junit.version>4.12</junit.version>
         <mockito.version>2.0.31-beta</mockito.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,12 +29,14 @@
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
             <version>${hazelcast.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-test</artifactId>
             <version>${curator.version}</version>
+            <scope>provided</scope>
             <scope>test</scope>
         </dependency>
 
