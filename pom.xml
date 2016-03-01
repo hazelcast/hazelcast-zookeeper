@@ -49,14 +49,14 @@
     
     <developers>
         <developer>
-            <id>oztalip</id>
-            <name>talip ozturk</name>
-            <email>talip@hazelcast.com</email>
+            <id>jerrinot</id>
+            <name>jaromir hamala</name>
+            <email>jaromir@hazelcast.com</email>
         </developer>
         <developer>
-            <id>fuad</id>
-            <name>fuad malikov</name>
-            <email>fuad@hazelcast.com</email>
+            <id>kobalski</id>
+            <name>ibrahim gurses</name>
+            <email>ibrahim@hazelcast.com</email>
         </developer>
     </developers>
 
