@@ -136,7 +136,7 @@ public static void main(String[] args) {
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast-zookeeper</artifactId>
-            <version>1.0</version>
+            <version>${hazelcast.version}</version>
         </dependency>
         <dependency>
             <groupId>com.hazelcast</groupId>
@@ -149,17 +149,6 @@ public static void main(String[] args) {
             <version>${hazelcast.version}</version>
       <dependency>
     </dependencies>
-    
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>bintray</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
 ...
 </project>
 ```
