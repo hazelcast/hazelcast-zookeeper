@@ -75,7 +75,7 @@
 
 </hazelcast-client>
 ```
-### Server Programatic Config
+### Server Programmatic Config
 
 ```java
 
@@ -97,7 +97,7 @@ public static void main(String[] args) {
 }
 ```
 
-### Client Programatic Config
+### Client Programmatic Config
 
 ```java
     ClientConfig config = new ClientConfig();
