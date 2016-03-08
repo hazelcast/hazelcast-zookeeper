@@ -14,7 +14,8 @@ import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class HazelcastIT {
+public class HazelcastIntegrationTest {
+
     private TestingServer zkTestServer;
 
     @Before
@@ -27,7 +28,6 @@ public class HazelcastIT {
         zkTestServer.close();
     }
 
-
     @Test
     public void testIntegration() {
         String zookeeperURL = zkTestServer.getConnectString();
@@ -36,9 +36,9 @@ public class HazelcastIT {
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
         config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED, "true");
 
-        DiscoveryStrategyConfig dicoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
-        dicoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);
-        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(dicoveryStrategyConfig);
+        DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
+        discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);
+        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
 
         HazelcastInstance instance1 = Hazelcast.newHazelcastInstance(config);
         HazelcastInstance instance2 = Hazelcast.newHazelcastInstance(config);

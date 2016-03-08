@@ -47,8 +47,8 @@ public class ZookeeperDiscoveryStrategyFactory implements DiscoveryStrategyFacto
         return ZookeeperDiscoveryStrategy.class;
     }
 
-    public DiscoveryStrategy newDiscoveryStrategy(DiscoveryNode discoveryNode,
-                                                  ILogger logger, Map<String, Comparable> properties) {
+    public DiscoveryStrategy newDiscoveryStrategy(DiscoveryNode discoveryNode, ILogger logger,
+                                                  Map<String, Comparable> properties) {
         return new ZookeeperDiscoveryStrategy(discoveryNode, logger, properties);
     }
 

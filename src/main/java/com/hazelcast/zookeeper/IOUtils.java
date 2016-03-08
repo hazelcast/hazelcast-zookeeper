@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.hazelcast.zookeeper;
 
 import org.slf4j.Logger;
