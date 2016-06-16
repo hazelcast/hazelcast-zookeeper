@@ -19,7 +19,7 @@ public class HazelcastIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        zkTestServer = new TestingServer(65462);
+        zkTestServer = new TestingServer();
     }
 
     @After
@@ -30,7 +30,6 @@ public class HazelcastIntegrationTest {
     @Test
     public void testIntegration() {
         String zookeeperURL = zkTestServer.getConnectString();
-        System.out.println(zookeeperURL);
         Config config = new Config();
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
         config.setProperty("hazelcast.discovery.enabled", "true");
