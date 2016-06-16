@@ -19,7 +19,7 @@ public class HazelcastIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        zkTestServer = new TestingServer();
+        zkTestServer = new TestingServer(65462);
     }
 
     @After
