@@ -470,19 +470,6 @@
             <properties>
                 <hazelcast.version>3.7-SNAPSHOT</hazelcast.version>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>com.hazelcast</groupId>
-                    <artifactId>hazelcast</artifactId>
-                    <version>${hazelcast.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.hazelcast</groupId>
-                    <artifactId>hazelcast</artifactId>
-                    <version>${hazelcast.version}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -498,8 +485,6 @@
                                 -Dhazelcast.logging.type=none
                                 -Dhazelcast.test.use.network=true
                             </argLine>
-                            <groups>com.hazelcast.test.annotation.QuickTest</groups>
-                            <excludedGroups>com.hazelcast.test.annotation.SlowTest</excludedGroups>
                         </configuration>
                     </plugin>
                 </plugins>
