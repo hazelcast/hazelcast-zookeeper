@@ -475,7 +475,12 @@
                     <groupId>com.hazelcast</groupId>
                     <artifactId>hazelcast</artifactId>
                     <version>${hazelcast.version}</version>
-                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.hazelcast</groupId>
+                    <artifactId>hazelcast</artifactId>
+                    <version>${hazelcast.version}</version>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
             <build>
