@@ -4,7 +4,6 @@ import com.hazelcast.config.Config;
 import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.instance.GroupProperty;
 import org.apache.curator.test.TestingServer;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +33,7 @@ public class HazelcastIntegrationTest {
 
         Config config = new Config();
         config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
-        config.setProperty(GroupProperty.DISCOVERY_SPI_ENABLED, "true");
+        config.setProperty("hazelcast.discovery.enabled", "true");
 
         DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
         discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);

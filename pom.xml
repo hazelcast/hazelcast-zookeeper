@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <jdk.version>1.6</jdk.version>
-        <hazelcast.version>3.6.1</hazelcast.version>
+        <hazelcast.version>3.7-SNAPSHOT</hazelcast.version>
 
         <curator.version>2.9.0</curator.version>
 
