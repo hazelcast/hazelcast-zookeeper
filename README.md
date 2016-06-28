@@ -1,7 +1,20 @@
+# Table of Contents
+
+* [Hazelcast Discovery Plugin for Apache ZooKeeper](#hazelcast-discovery-plugin-for-apache-zooKeeper)
+  * [Configuration](#configuration)
+    * [Server XML Config](#server-xml-config)
+    * [Client XML Config](#client-xml-config)
+    * [Server Programmatic Config](#server-programmatic-config)
+    * [Client Programmatic Config](#client-programmatic-config)
+    * [Configuration via Maven](#configuration-via-maven)
+  * [Compatibilities](#compatibilities)
+
+
 # Hazelcast Discovery Plugin for Apache ZooKeeper
 
+This plugin provides a service based discovery strategy by using Apache Curator to communicate with your Zookeeper server. You can use this plugin with Discovery SPI enabled Hazelcast 3.6.1 and higher  applications.
 
-##Configuration
+## Configuration
 
 ### Server XML Config  
 
@@ -40,7 +53,8 @@
     </network>
 </hazelcast>
 ```
-###Client XML Config
+
+### Client XML Config
 
 ```xml
 <hazelcast-client xsi:schemaLocation="http://www.hazelcast.com/schema/client-config hazelcast-client-config-3.6.xsd"
@@ -113,7 +127,8 @@ public static void main(String[] args) {
     HazelcastClient.newHazelcastClient(config);
 
 ```
-###Configuration via Maven
+### Configuration via Maven
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -153,7 +168,8 @@ public static void main(String[] args) {
 </project>
 ```
 
-##Important Notice
+## Compatibilities
+
 In order for the hazelcast-zookeeper plugin to work for the Hazelcast Java client, you need to use Hazelcast Client 3.6.1 or higher.
 
 
