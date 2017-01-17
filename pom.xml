@@ -322,8 +322,6 @@
                         <configuration combine.self="override">
                             <redirectTestOutputToFile>true</redirectTestOutputToFile>
                             <testFailureIgnore>true</testFailureIgnore>
-                            <groups>com.hazelcast.test.annotation.QuickTest</groups>
-                            <excludedGroups>com.hazelcast.test.annotation.SlowTest</excludedGroups>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -351,9 +349,6 @@
                             <excludes>
                                 <exclude>**/jsr/**.java</exclude>
                             </excludes>
-                            <excludedGroups>
-                                com.hazelcast.test.annotation.QuickTest,com.hazelcast.test.annotation.SlowTest
-                            </excludedGroups>
                         </configuration>
                     </plugin>
                 </plugins>
