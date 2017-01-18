@@ -7,7 +7,9 @@ import com.hazelcast.core.HazelcastInstance;
 import org.apache.curator.test.TestingServer;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
@@ -17,6 +19,9 @@ public class HazelcastIntegrationTest {
 
     private TestingServer zkTestServer;
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
     @Before
     public void setUp() throws Exception {
         zkTestServer = new TestingServer();
@@ -24,6 +29,8 @@ public class HazelcastIntegrationTest {
 
     @After
     public void tearDown() throws IOException {
+        Hazelcast.shutdownAll();
+
         zkTestServer.close();
     }
 
@@ -36,6 +43,27 @@ public class HazelcastIntegrationTest {
 
         DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
         discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), zookeeperURL);
+        config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
+
+        HazelcastInstance instance1 = Hazelcast.newHazelcastInstance(config);
+        HazelcastInstance instance2 = Hazelcast.newHazelcastInstance(config);
+
+        int instance1Size = instance1.getCluster().getMembers().size();
+        assertEquals(2, instance1Size);
+        int instance2Size = instance2.getCluster().getMembers().size();
+        assertEquals(2, instance2Size);
+    }
+
+    @Test
+    public void testIntegration_urlNotConfigured() {
+        exception.expect(IllegalStateException.class);
+        exception.expectMessage("Zookeeper URL cannot be null.");
+
+        Config config = new Config();
+        config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+        config.setProperty("hazelcast.discovery.enabled", "true");
+
+        DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(new ZookeeperDiscoveryStrategyFactory());
         config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
 
         HazelcastInstance instance1 = Hazelcast.newHazelcastInstance(config);
