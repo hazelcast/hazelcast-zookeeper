@@ -105,7 +105,7 @@ public static void main(String[] args) {
   discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), "{ip-address-of-zookeeper}:{port-of-zookeeper}");
   discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH.key(), "{path-on-zookeeper}");
   discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.GROUP.key(), "{clusterId}");
-  config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(dicoveryStrategyConfig);
+  config.getNetworkConfig().getJoin().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
 
   Hazelcast.newHazelcastInstance(config);
 }
@@ -122,7 +122,7 @@ public static void main(String[] args) {
     discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_URL.key(), "{ip-address-of-zookeeper}:{port-of-zookeeper}");
     discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH.key(), "{path-on-zookeeper}");
     discoveryStrategyConfig.addProperty(ZookeeperDiscoveryProperties.GROUP.key(), "{clusterId}");
-    config.getNetworkConfig().getDiscoveryConfig().addDiscoveryStrategyConfig(dicoveryStrategyConfig);
+    config.getNetworkConfig().getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
 
     HazelcastClient.newHazelcastClient(config);
 
