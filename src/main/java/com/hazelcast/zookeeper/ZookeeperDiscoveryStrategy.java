@@ -29,7 +29,6 @@ import org.apache.curator.x.discovery.ServiceDiscoveryBuilder;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.UriSpec;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -44,7 +43,6 @@ public class ZookeeperDiscoveryStrategy
 
     private static final String DEFAULT_PATH = "/discovery/hazelcast";
     private static final String DEFAULT_GROUP = "hazelcast";
-    private static final int DEFAULT_HZ_PORT = 5701;
     private static final int CURATOR_BASE_SLEEP_TIME_MS = 1000;
 
     private final DiscoveryNode thisNode;
@@ -61,42 +59,42 @@ public class ZookeeperDiscoveryStrategy
         this.logger = logger;
     }
 
+    private boolean isMember() {
+        return thisNode != null;
+    }
+
     @Override
     public void start() {
         startCuratorClient();
-        /* Added this for clients, because Discovery SPI does not set
-        discoveryNode for clients */
-        Address privateAddress = null;
-        try {
-            privateAddress = new Address("127.0.0.1", DEFAULT_HZ_PORT);
-        } catch (UnknownHostException e) {
-            logger.warning("Cannot bind local host");
-        }
-
-        if (thisNode != null) {
-            privateAddress = thisNode.getPrivateAddress();
-        }
 
         group = getOrDefault(ZookeeperDiscoveryProperties.GROUP, DEFAULT_GROUP);
         try {
-            serviceInstance = ServiceInstance.<Void>builder()
-                    .uriSpec(new UriSpec("{scheme}://{address}:{port}"))
-                    .address(privateAddress.getHost())
-                    .port(privateAddress.getPort())
-                    .name(group)
-                    .build();
-
             String path = getOrDefault(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH, DEFAULT_PATH);
-            serviceDiscovery = ServiceDiscoveryBuilder.builder(Void.class)
+            ServiceDiscoveryBuilder<Void> discoveryBuilder = ServiceDiscoveryBuilder.builder(Void.class)
                     .basePath(path)
-                    .client(client)
-                    .thisInstance(serviceInstance)
-                    .build();
+                    .client(client);
 
+            if (isMember()) {
+                //register members only into zookeeper
+                //there no need to register clients
+                prepareServiceInstance();
+                discoveryBuilder.thisInstance(serviceInstance);
+            }
+            serviceDiscovery = discoveryBuilder.build();
             serviceDiscovery.start();
         } catch (Exception e) {
             throw new IllegalStateException("Error while talking to ZooKeeper. ", e);
         }
+    }
+
+    private void prepareServiceInstance() throws Exception {
+        Address privateAddress = thisNode.getPrivateAddress();
+        serviceInstance = ServiceInstance.<Void>builder()
+                .uriSpec(new UriSpec("{scheme}://{address}:{port}"))
+                .address(privateAddress.getHost())
+                .port(privateAddress.getPort())
+                .name(group)
+                .build();
     }
 
     private void startCuratorClient() {
@@ -136,7 +134,7 @@ public class ZookeeperDiscoveryStrategy
     @Override
     public void destroy() {
         try {
-            if (serviceDiscovery != null) {
+            if (isMember() && serviceDiscovery != null) {
                 serviceDiscovery.unregisterService(serviceInstance);
             }
         } catch (InterruptedException e) {
