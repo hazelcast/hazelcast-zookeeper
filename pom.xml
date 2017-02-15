@@ -5,7 +5,7 @@
     <artifactId>hazelcast-zookeeper</artifactId>
     <description>Hazelcast Zookeeper Discovery Plugin</description>
     <url>http://www.hazelcast.com/</url>
-    <version>3.6.3</version>
+    <version>3.6.4-SNAPSHOT</version>
 
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
