@@ -35,7 +35,7 @@ public class ZookeeperDiscoveryStrategyFactory implements DiscoveryStrategyFacto
     private static final Collection<PropertyDefinition> PROPERTY_DEFINITIONS;
 
     static {
-        List<PropertyDefinition> propertyDefinitions = new ArrayList<PropertyDefinition>();
+        List<PropertyDefinition> propertyDefinitions = new ArrayList<>();
         propertyDefinitions.add(ZookeeperDiscoveryProperties.ZOOKEEPER_URL);
         propertyDefinitions.add(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH);
         propertyDefinitions.add(ZookeeperDiscoveryProperties.GROUP);
