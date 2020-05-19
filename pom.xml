@@ -29,7 +29,7 @@
 
         <curator.version>4.0.1</curator.version>
 
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13</junit.version>
         <mockito.version>2.0.31-beta</mockito.version>
         <log4j2.version>2.3</log4j2.version>
 
