@@ -18,14 +18,14 @@
     <artifactId>hazelcast-zookeeper</artifactId>
     <description>Hazelcast Zookeeper Discovery Plugin</description>
     <url>http://www.hazelcast.com/</url>
-    <version>3.6.4-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
 
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jdk.version>1.6</jdk.version>
-        <hazelcast.version>3.7.4</hazelcast.version>
+        <jdk.version>1.8</jdk.version>
+        <hazelcast.version>4.0.1</hazelcast.version>
 
         <curator.version>4.3.0</curator.version>
 
@@ -88,13 +88,13 @@
                 <configuration>
                     <signature>
                         <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
+                        <artifactId>java18</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>source-java6-check</id>
+                        <id>source-java8-check</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
@@ -221,6 +221,14 @@
         </dependency>
 
         <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+            <scope>test</scope>
+            <version>${hazelcast.version}</version>
+            <classifier>tests</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-test</artifactId>
             <version>${curator.version}</version>
@@ -231,29 +239,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-client</artifactId>
-            <version>${hazelcast.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-client</artifactId>
-            <version>${hazelcast.version}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>${hazelcast.version}</version>
-            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
 
@@ -270,20 +255,6 @@
             <version>${log4j2.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${bytebuddy.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>${bytebuddy.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
     </dependencies>
 
     <profiles>

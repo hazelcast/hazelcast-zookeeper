@@ -15,8 +15,8 @@
 
 package com.hazelcast.zookeeper;
 
+import com.hazelcast.cluster.Address;
 import com.hazelcast.logging.ILogger;
-import com.hazelcast.nio.Address;
 import com.hazelcast.spi.discovery.AbstractDiscoveryStrategy;
 import com.hazelcast.spi.discovery.DiscoveryNode;
 import com.hazelcast.spi.discovery.SimpleDiscoveryNode;
@@ -28,21 +28,20 @@ import org.apache.curator.x.discovery.ServiceDiscoveryBuilder;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.UriSpec;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Implementation for Zookeeper Discovery Strategy
  */
-public class ZookeeperDiscoveryStrategy
-        extends AbstractDiscoveryStrategy {
+public class ZookeeperDiscoveryStrategy extends AbstractDiscoveryStrategy {
 
     private static final String DEFAULT_PATH = "/discovery/hazelcast";
     private static final String DEFAULT_GROUP = "hazelcast";
-    private static final int CURATOR_BASE_SLEEP_TIME_MS = 1000;
+    private static final Duration CURATOR_BASE_SLEEP_TIME = Duration.ofSeconds(1);
 
     private final DiscoveryNode thisNode;
     private final ILogger logger;
@@ -70,8 +69,8 @@ public class ZookeeperDiscoveryStrategy
         try {
             String path = getOrDefault(ZookeeperDiscoveryProperties.ZOOKEEPER_PATH, DEFAULT_PATH);
             ServiceDiscoveryBuilder<Void> discoveryBuilder = ServiceDiscoveryBuilder.builder(Void.class)
-                    .basePath(path)
-                    .client(client);
+              .basePath(path)
+              .client(client);
 
             if (isMember()) {
                 //register members only into zookeeper
@@ -89,11 +88,11 @@ public class ZookeeperDiscoveryStrategy
     private void prepareServiceInstance() throws Exception {
         Address privateAddress = thisNode.getPrivateAddress();
         serviceInstance = ServiceInstance.<Void>builder()
-                .uriSpec(new UriSpec("{scheme}://{address}:{port}"))
-                .address(privateAddress.getHost())
-                .port(privateAddress.getPort())
-                .name(group)
-                .build();
+          .uriSpec(new UriSpec("{scheme}://{address}:{port}"))
+          .address(privateAddress.getHost())
+          .port(privateAddress.getPort())
+          .name(group)
+          .build();
     }
 
     private void startCuratorClient() {
@@ -104,22 +103,19 @@ public class ZookeeperDiscoveryStrategy
         if (logger.isFinestEnabled()) {
             logger.finest("Using " + zookeeperUrl + " as Zookeeper URL");
         }
-        client = CuratorFrameworkFactory.newClient(zookeeperUrl, new ExponentialBackoffRetry(CURATOR_BASE_SLEEP_TIME_MS, 3));
+        client = CuratorFrameworkFactory.newClient(
+          zookeeperUrl,
+          new ExponentialBackoffRetry((int) CURATOR_BASE_SLEEP_TIME.toMillis(), 3));
         client.start();
     }
 
     public Iterable<DiscoveryNode> discoverNodes() {
         try {
             Collection<ServiceInstance<Void>> members = serviceDiscovery.queryForInstances(group);
-            List<DiscoveryNode> nodes = new ArrayList<DiscoveryNode>(members.size());
+            List<DiscoveryNode> nodes = new ArrayList<>(members.size());
             for (ServiceInstance<Void> serviceInstance : members) {
-                String host = serviceInstance.getAddress();
-                Integer port = serviceInstance.getPort();
-
-                Address address = new Address(host, port);
-
-                SimpleDiscoveryNode node = new SimpleDiscoveryNode(address);
-                nodes.add(node);
+                Address address = new Address(serviceInstance.getAddress(), serviceInstance.getPort());
+                nodes.add(new SimpleDiscoveryNode(address));
             }
             return nodes;
         } catch (InterruptedException e) {

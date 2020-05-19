@@ -24,7 +24,7 @@ public class ClientSmokeTest extends HazelcastTestSupport {
     private static final int CLUSTER_SIZE = 2;
 
     private TestingServer zkTestServer;
-    private HazelcastInstance[] instances = new HazelcastInstance[CLUSTER_SIZE];
+    private final HazelcastInstance[] instances = new HazelcastInstance[CLUSTER_SIZE];
 
     @Before
     public void setUp() throws Exception {
