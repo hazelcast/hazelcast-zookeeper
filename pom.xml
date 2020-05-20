@@ -66,6 +66,11 @@
             <name>ibrahim gurses</name>
             <email>ibrahim@hazelcast.com</email>
         </developer>
+        <developer>
+            <id>pivovarit</id>
+            <name>grzegorz piwowarek</name>
+            <email>gpiwowarek@gmail.com</email>
+        </developer>
     </developers>
 
     <build>
