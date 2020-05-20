@@ -1,3 +1,5 @@
+![build](https://github.com/hazelcast/hazelcast-zookeeper/workflows/build/badge.svg)
+
 # Table of Contents
 
 * [Hazelcast Discovery Plugin for Apache ZooKeeper](#hazelcast-discovery-plugin-for-apache-zooKeeper)
