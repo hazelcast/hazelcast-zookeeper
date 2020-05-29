@@ -1,5 +1,4 @@
 ![build](https://github.com/hazelcast/hazelcast-zookeeper/workflows/build/badge.svg)
-
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.hazelcast/hazelcast-zookeeper/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.hazelcast/hazelcast-zookeeper) 
 
 # Table of Contents
