@@ -177,7 +177,7 @@ In order for the hazelcast-zookeeper plugin to work for the Hazelcast Java clien
 
 hazelcast-zookeeper-3.6.3 has been tested with Curator 2.9.0 and Zookeeper 3.4.6
 
-Current Snapshot version of hazelcast-zookeeper has been tested with Curator 4.0.1 and Zookeeper 3.5.3-beta
+hazelcast-zookeeper-4.0 has been tested with Curator 4.0.1 and Zookeeper 3.5.7
 
 ### Known Issues
 There is an issue between zookeeper and curator client in some versions. You may get `Received packet at server of unknown type 15` error.
