@@ -20,6 +20,14 @@
     <url>http://www.hazelcast.com/</url>
     <version>4.0.1-SNAPSHOT</version>
 
+    <licenses>
+        <license>
+            <name>The Hazelcast Community License</name>
+            <url>http://hazelcast.com/hazelcast-community-license</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
