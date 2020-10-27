@@ -1,4 +1,5 @@
-![build](https://github.com/hazelcast/hazelcast-zookeeper/workflows/build/badge.svg)
+  <a href="https://github.com/hazelcast/hazelcast-zookeeper/actions?query=workflow%3Abuild"><img alt="GitHub Actions status" src="https://github.com/hazelcast/hazelcast-zookeeper/workflows/build/badge.svg"></a>
+  <a href="https://hazelcast.github.io/hazelcast-zookeeper/pitest/"><img alt="GitHub Actions status" src="https://github.com/hazelcast/hazelcast-zookeeper/workflows/pitest/badge.svg"></a>
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.hazelcast/hazelcast-zookeeper/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.hazelcast/hazelcast-zookeeper) 
 
 # Table of Contents
