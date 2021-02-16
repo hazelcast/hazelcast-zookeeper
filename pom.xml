@@ -18,7 +18,7 @@
     <artifactId>hazelcast-zookeeper</artifactId>
     <description>Hazelcast Zookeeper Discovery Plugin</description>
     <url>http://www.hazelcast.com/</url>
-    <version>4.0.2</version>
+    <version>4.0.3-SNAPSHOT</version>
 
     <licenses>
         <license>
