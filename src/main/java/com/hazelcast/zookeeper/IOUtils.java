@@ -21,10 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.io.Closeable;
 import java.io.IOException;
 
-/**
- * The type IO utils.
- */
-public final class IOUtils {
+final class IOUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IOUtils.class);
 
